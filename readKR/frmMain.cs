@@ -18,7 +18,7 @@ namespace readKR
             this.tbCategoryID.Text = 8778.ToString();
         }
         private KrDAO krDAO = KrDAO.getKrDAO();
-        private void button1_Click(object sender, EventArgs e)
+        private void btnGetInfo_Click(object sender, EventArgs e)
         {
             if (this.tbCategoryID.Text == string.Empty)
                 return;
@@ -34,6 +34,13 @@ namespace readKR
             this.wbXML.DocumentText = info_XML;
             this.tbCategoryInfo.Text = info_category;
             this.tbTextInfo.Text = info_text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlServerUtils sqlutils = SqlServerUtils.getInstance();
+            //sqlutils.db3ToSqlServer();
+            //sqlutils.set_parentGUID("krv_category");
         }
     }
 }

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data;
-using krDataModels;
+using DataModels;
 namespace readKR
 {
     class KrDAO
     {
-        private string dataSet_path = "../../DataBase/krcon11.db3";
+        private string dataSet_path = "../../DataBase/backkrcon11.db3";
         private string password = "_krcon2012_";
         private SQLiteConnection cnn;
         private static KrDAO _krDAO;
@@ -27,7 +27,7 @@ namespace readKR
         private void krConnect()
         {
             cnn = new SQLiteConnection("Data Source="+dataSet_path);
-            cnn.SetPassword(password);
+            //cnn.SetPassword(password);
             cnn.Open();
         }
         public DataTable getTable(string sql)
@@ -39,13 +39,32 @@ namespace readKR
         }     
         public DataSet getDataSet()
         {
-            string sql = "select * from KRT_CATEGORY";
-            string sql1 = "select * from krt_category_text";
+            string sql1 = "select * from KRT_CATEGORY";//53121
+            string sql2 = "select category_text_id,category_id,locale_key,category_title,category_desc,data_xml,is_visible from krt_category_text where locale_key='en' or locale_key='zh'";
+            string sql3 = "select * from krv_category";
+            string sql4 = "select * from KRT_REF_MATERIAL";
+            string sql5 = "select * from KRT_REF_MATERIAL_FILE";
+            string sql6 = "select * from KRT_REF_MATERIAL_SYNC";
             DataSet krDataSet = new DataSet();
-            DataTable dt_krt_category=this.getTable(sql);
-            DataTable dt_krt_category_text= this.getTable(sql1);
-            krDataSet.Tables.Add(dt_krt_category);
-            krDataSet.Tables.Add(dt_krt_category_text);
+            //DataTable krt_category=this.getTable(sql1);
+            //krt_category.TableName = "krt_category";
+            DataTable krt_category_text= this.getTable(sql2);
+            krt_category_text.TableName = "krt_category_text";
+            //DataTable krv_category = this.getTable(sql3);
+            //krv_category.TableName = "krv_category";
+            //DataTable krt_ref_material = this.getTable(sql4);
+            //krt_ref_material.TableName = "krt_ref_material";
+            //DataTable krt_ref_material_file = this.getTable(sql5);
+            //krt_ref_material_file.TableName = "krt_ref_material_file";
+            // DataTable krt_ref_material_sync = this.getTable(sql6);
+            // krt_ref_material_sync.TableName = "krt_ref_material_sync";
+            //krDataSet.Tables.Add(krt_category);
+            //Console.WriteLine(krDataSet.Tables["krt_category"].Rows.Count);
+            krDataSet.Tables.Add(krt_category_text);
+            //krDataSet.Tables.Add(krv_category);
+            //krDataSet.Tables.Add(krt_ref_material);
+            //krDataSet.Tables.Add(krt_ref_material_file);
+            //krDataSet.Tables.Add(krt_ref_material_sync);
             return krDataSet;
         }
         public string getStr_CATEGORY(int categoryID)//for test
@@ -57,6 +76,7 @@ namespace readKR
             while (reader.Read())
             {
                 sb.Append(" CATEGORY_ID:\t" + reader["CATEGORY_ID"] + "\r\n ");
+                sb.Append(" GUID:\t" + reader["GUID"] + "\r\n ");
                 sb.Append("PARENT_CATEGORY_ID:\t" + reader["PARENT_CATEGORY_ID"] + "\r\n ");
                 sb.Append("CATEGORY_TREE:\t" + reader["CATEGORY_TREE"] + "\r\n ");                
                 sb.Append("CATEGORY_ORDER:\t" + reader["CATEGORY_ORDER"] + "\r\n ");
@@ -101,7 +121,7 @@ namespace readKR
                 sb.Append("LOCALE_KEY:\t" + reader["LOCALE_KEY"] + "\r\n ");
                 sb.Append("CATEGORY_TITLE:\t" + reader["CATEGORY_TITLE"] + "\r\n ");
                 sb.Append("CATEGORY_DESC:\t" + reader["CATEGORY_DESC"] + "\r\n ");
-                sb.Append("IS_VISIBLE:\t" + reader["IS_VISIBLE"] + "\r\n ");                
+                sb.Append("IS_VISIBLE:\t" + Convert.ToInt32(reader["IS_VISIBLE"]) + "\r\n ");                
             }
             return sb.ToString();
         }
@@ -155,6 +175,7 @@ namespace readKR
             }
             return category;
         }
-        public KRT_REF_MATERIAL get_REF_MATRRIAL
+        
+       
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace krDataModels
+﻿namespace DataModels
 {
     using System;
     using System.Data;
@@ -7,6 +7,7 @@
     {
         public KRT_CATEGORY(DataRow row)
         {
+            this.GUID = Guid.Parse(row["GUID"].ToString());
             this.ADAPTED_BY = row["ADAPTED_BY"].ToString();
             this.CATEGORY_TREE = row["CATEGORY_TREE"].ToString();
             this.CHAPTER_YEAR_ROOT = row["CHAPTER_YEAR_ROOT"].ToString();
@@ -85,6 +86,7 @@
             this.DELIVERY_DATE_L = Convert.ToDateTime(row["DELIVERY_DATE_L"]);
             this.REG_DATE = Convert.ToDateTime(row["REG_DATE"]);
         }
+        public virtual Guid GUID { get; set; }
         public virtual int CATEGORY_ID { get; set; }
         public virtual string ADAPTED_BY { get; set; }
         public virtual int CATEGORY_ORDER { get; set; }

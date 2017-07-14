@@ -1,4 +1,4 @@
-﻿namespace krDataModels
+﻿namespace DataModels
 {
     using System;
     using System.Data;

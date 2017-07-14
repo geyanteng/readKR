@@ -75,6 +75,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\ConventionQueryRow.cs" />
+    <Compile Include="DataModels\ConventionRow.cs" />
+    <Compile Include="DataModels\KRT_CATEGORY.cs" />
+    <Compile Include="DataModels\KRT_CATEGORY_TEXT.cs" />
+    <Compile Include="DataModels\KRT_DATA.cs" />
+    <Compile Include="DataModels\KRT_REF_MATERIAL.cs" />
+    <Compile Include="DataModels\KRT_REF_MATERIAL_FILE.cs" />
+    <Compile Include="DataModels\KRT_REF_MATERIAL_SYNC.cs" />
+    <Compile Include="DataModels\KRV_CATEGORY.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,13 +91,9 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="krDAO.cs" />
-    <Compile Include="krDataModels\KRT_CATEGORY.cs" />
-    <Compile Include="krDataModels\KRT_CATEGORY_TEXT.cs" />
-    <Compile Include="krDataModels\KRT_REF_MATERIAL.cs" />
-    <Compile Include="krDataModels\KRT_REF_MATERIAL_FILE.cs" />
-    <Compile Include="krDataModels\KRT_REF_MATERIAL_SYNC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerUtils.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
