@@ -15,32 +15,30 @@ namespace readKR
         public frmMain()
         {
             InitializeComponent();
-            this.tbCategoryID.Text = 8778.ToString();
+            //this.tbCategoryID.Text = 8778.ToString();
+            XML.loadXML("TreeXml.xml", this.treeView1);
+            wbContentLocation = this.wbContent.Location;
+            wbContentHeight = wbContent.Height;
         }
         private KrDAO krDAO = KrDAO.getKrDAO();
-        private void btnGetInfo_Click(object sender, EventArgs e)
-        {
-            if (this.tbCategoryID.Text == string.Empty)
-                return;
-            string language;
-            if (this.rbEn.Checked)
-                language = "en";
-            else
-                language = "zh";
-            int categoryID = int.Parse(this.tbCategoryID.Text);
-            string info_XML = krDAO.getXML_CATEGORY_TEXT(categoryID,language);
-            string info_category = krDAO.getStr_CATEGORY(categoryID);
-            string info_text = krDAO.getStr_CATEGORY_TEXT(categoryID, language);
-            this.wbXML.DocumentText = info_XML;
-            this.tbCategoryInfo.Text = info_category;
-            this.tbTextInfo.Text = info_text;
-        }
+        //private void btnGetInfo_Click(object sender, EventArgs e)
+        //{
+        //    if (this.tbCategoryID.Text == string.Empty)
+        //        return;
+        //    string language;
+        //    if (this.rbEn.Checked)
+        //        language = "en";
+        //    else
+        //        language = "zh";
+        //    int categoryID = int.Parse(this.tbCategoryID.Text);
+        //    string info_XML = krDAO.getXML_CATEGORY_TEXT(categoryID,language);
+        //    string info_category = krDAO.getStr_CATEGORY(categoryID);
+        //    string info_text = krDAO.getStr_CATEGORY_TEXT(categoryID, language);
+        //    this.wbXML.DocumentText = info_XML;
+        //    this.tbCategoryInfo.Text = info_category;
+        //    this.tbTextInfo.Text = info_text;
+        //}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SqlServerUtils sqlutils = SqlServerUtils.getInstance();
-            //sqlutils.db3ToSqlServer();
-            //sqlutils.set_parentGUID("krv_category");
-        }
+
     }
 }
